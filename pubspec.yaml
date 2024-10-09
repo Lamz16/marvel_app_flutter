@@ -63,6 +63,10 @@ flutter:
      - assets/icon/fire.png
      - assets/icon/strength.png
      - assets/icon/superhero.png
+     - assets/images/captain_america.jpeg
+     - assets/images/captain_marvel.jpeg
+     - assets/images/hawkeye.jpeg
+     - assets/images/hulk.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
@@ -86,6 +90,17 @@ flutter:
   #       - asset: fonts/TrajanPro.ttf
   #       - asset: fonts/TrajanPro_Bold.ttf
   #         weight: 700
+  fonts:
+    - family: Poppins
+      fonts:
+        - asset: fonts/poppins/Poppins-Black.ttf
+        - asset: fonts/poppins/Poppins-Bold.ttf
+        - asset: fonts/poppins/Poppins-ExtraBold.ttf
+        - asset: fonts/poppins/Poppins-ExtraLight.ttf
+        - asset: fonts/poppins/Poppins-Light.ttf
+        - asset: fonts/poppins/Poppins-Medium.ttf
+        - asset: fonts/poppins/Poppins-Regular.ttf
+        - asset: fonts/poppins/Poppins-SemiBold.ttf
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
