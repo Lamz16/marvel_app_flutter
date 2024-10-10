@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:marvel_app/screen/detail_screen.dart';
 
 import 'screen/my_home_page.dart';
 
@@ -19,7 +20,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const MyHomePage(title: 'Marvel App'),
+      home: const MyHomePage(title: 'Avengers App'),
     );
   }
 }
