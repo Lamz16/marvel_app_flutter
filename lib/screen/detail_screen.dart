@@ -2,14 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:marvel_app/custom_view/detail_teks.dart';
 import 'package:marvel_app/custom_view/irow_detail_hero.dart';
 import 'package:marvel_app/data/content_data.dart';
+import 'package:marvel_app/my_colors.dart';
 
 class DetailScreen extends StatelessWidget {
-  const DetailScreen({Key? key}) : super(key: key);
+  final SuperheroData avengers;
+  const DetailScreen({Key? key, required this.avengers}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    var superHero = superHeroList;
+    var superHero = superHeroList.where((hero) => hero != avengers).toList();
     return Scaffold(
+      backgroundColor: AppColors.orange,
       body: SafeArea(
           child: SingleChildScrollView(
         child: Column(
@@ -17,11 +20,11 @@ class DetailScreen extends StatelessWidget {
           children: <Widget>[
             Container(
                 margin:
-                    const EdgeInsets.only(top: 16.0, right: 36.0, left: 36.0),
+                    const EdgeInsets.only(top: 16.0, right: 16.0, left: 16.0),
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(10.0),
                   child: Image.asset(
-                    'assets/images/captain_america.jpeg',
+                    avengers.imageUrl,
                     width: 200,
                     height: 200,
                     fit: BoxFit.cover,
@@ -30,10 +33,10 @@ class DetailScreen extends StatelessWidget {
                 )),
             Container(
               margin: const EdgeInsets.only(top: 16.0),
-              child: const Text(
-                'Captain America',
+              child: Text(
+                avengers.name,
                 textAlign: TextAlign.center,
-                style: TextStyle(
+                style: const TextStyle(
                     fontSize: 30.0,
                     fontWeight: FontWeight.w700,
                     fontFamily: 'Poppins'),
@@ -41,12 +44,11 @@ class DetailScreen extends StatelessWidget {
             ),
             Container(
               margin: const EdgeInsets.only(top: 24.0),
-              child: const IrowDetailHero(),
+              child: IrowDetailHero(avengers: avengers,),
             ),
-            const DetailTeks(
-                teks:
-                    'Captain America, diciptakan oleh Joe Simon dan Jack Kirby pada 1941, adalah alter ego Steve Rogers. Setelah menjalani eksperimen Project Rebirth, dia memperoleh kekuatan super dan menjadi simbol patriotisme. Dikenal dengan perisai bulatnya, Captain America memimpin Avengers dan melambangkan nilai-nilai keadilan, keberanian, dan integritas.',
-                margin: EdgeInsets.only(top: 16.0, right: 16.0, left: 16.0)),
+            DetailTeks(
+                teks: avengers.detail,
+                margin: const EdgeInsets.only(top: 16.0, right: 16.0, left: 16.0)),
             const SizedBox(
               height: 8.0,
             ),
