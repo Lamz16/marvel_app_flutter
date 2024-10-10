@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:marvel_app/my_colors.dart';
 
 class FavoriteButton extends StatefulWidget{
   const FavoriteButton({Key? key }) : super(key: key);
@@ -13,10 +14,11 @@ class _FavoriteButtonState extends State<FavoriteButton>{
   @override
   Widget build(BuildContext context) {
     return IconButton(
-      color: Colors.white,
-      icon: Icon(isFavorite ? Icons.favorite : Icons.favorite_border),
+      icon: Icon(isFavorite ? Icons.favorite : Icons.favorite_border,color: AppColors.red,size: 36.0,),
       onPressed: (){
-        isFavorite = !isFavorite;
+        setState(() {
+          isFavorite = !isFavorite;
+        });
       },
     );
   }
