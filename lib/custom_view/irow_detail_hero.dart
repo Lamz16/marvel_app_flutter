@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:marvel_app/my_colors.dart';
 
+import '../data/content_data.dart';
+
 class IrowDetailHero extends StatelessWidget {
-  const IrowDetailHero({Key? key}) : super(key: key);
+  final SuperheroData avengers;
+  const IrowDetailHero({Key? key, required this.avengers}) : super(key: key);
 
   Widget _buildIconWithLabel(
       String icon, String label, VoidCallback onPressed, String resource) {
@@ -36,25 +39,25 @@ class IrowDetailHero extends StatelessWidget {
       children: <Widget>[
         _buildIconWithLabel('assets/icon/fire.png', 'Popularity', () {
           showDialog(context: context, builder: (context){
-            return const AlertDialog(
-              content: Text('The popularity is 1.800.000'),
+            return AlertDialog(
+              content: Text('The popularity is ${avengers.popularity}'),
             );
           });
-        }, '1.800.000'),
+        }, avengers.popularity),
         _buildIconWithLabel('assets/icon/superhero.png', 'Type', () {
           showDialog(context: context, builder: (context){
-            return const AlertDialog(
-              content: Text('Hero type is Physical'),
+            return AlertDialog(
+              content: Text('Hero type is ${avengers.type}'),
             );
           });
         }, 'Physical'),
         _buildIconWithLabel('assets/icon/strength.png', 'Total Strength', () {
           showDialog(context: context, builder: (context){
-            return const AlertDialog(
-              content: Text('The strength is 92 Powers'),
+            return AlertDialog(
+              content: Text('The strength is ${avengers.strength} Powers'),
             );
           });
-        }, '92/100')
+        }, avengers.strength)
       ],
     );
   }
