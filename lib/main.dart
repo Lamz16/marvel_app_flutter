@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:marvel_app/screen/detail_screen.dart';
 
 import 'screen/my_home_page.dart';
 
