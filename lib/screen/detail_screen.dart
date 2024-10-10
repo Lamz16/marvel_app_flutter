@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:marvel_app/custom_view/detail_teks.dart';
+import 'package:marvel_app/custom_view/favorite_button.dart';
 import 'package:marvel_app/custom_view/irow_detail_hero.dart';
 import 'package:marvel_app/data/content_data.dart';
 import 'package:marvel_app/my_colors.dart';
 
 class DetailScreen extends StatelessWidget {
   final SuperheroData avengers;
+
   const DetailScreen({Key? key, required this.avengers}) : super(key: key);
 
   @override
@@ -19,18 +21,29 @@ class DetailScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
             Container(
-                margin:
-                    const EdgeInsets.only(top: 16.0, right: 16.0, left: 16.0),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(10.0),
-                  child: Image.asset(
-                    avengers.imageUrl,
-                    width: 200,
-                    height: 200,
-                    fit: BoxFit.cover,
-                    semanticLabel: 'Image Hero',
+              margin: const EdgeInsets.only(top: 16.0, right: 16.0, left: 16.0),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(10.0),
+                child: Container(
+                  width: double.infinity,
+                  height: 200,
+                  child: Stack(
+                    alignment: Alignment.center,
+                    children: [
+                      Image.asset(
+                        avengers.imageUrl,
+                        width: double.infinity,
+                        height: 200,
+                        fit: BoxFit.cover,
+                        semanticLabel: 'Image Hero',
+                      ),
+                      const Positioned(
+                          bottom: 10.0, right: 20.0, child: FavoriteButton())
+                    ],
                   ),
-                )),
+                ),
+              ),
+            ),
             Container(
               margin: const EdgeInsets.only(top: 16.0),
               child: Text(
@@ -44,11 +57,14 @@ class DetailScreen extends StatelessWidget {
             ),
             Container(
               margin: const EdgeInsets.only(top: 24.0),
-              child: IrowDetailHero(avengers: avengers,),
+              child: IrowDetailHero(
+                avengers: avengers,
+              ),
             ),
             DetailTeks(
                 teks: avengers.detail,
-                margin: const EdgeInsets.only(top: 16.0, right: 16.0, left: 16.0)),
+                margin:
+                    const EdgeInsets.only(top: 16.0, right: 16.0, left: 16.0)),
             const SizedBox(
               height: 8.0,
             ),
@@ -57,42 +73,53 @@ class DetailScreen extends StatelessWidget {
               child: ListView(
                 scrollDirection: Axis.horizontal,
                 children: superHero.map((hero) {
-                  return Stack(
-                    alignment: Alignment.center,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.all(4.0),
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(10.0),
-                          child: ColorFiltered(
-                            colorFilter: ColorFilter.mode(
-                              Colors.black.withOpacity(0.5),
-                              BlendMode.darken,
-                            ),
-                            child: Image.asset(
-                              hero.imageUrl,
-                              height: 160,
-                              width: 280,
-                              fit: BoxFit.cover,
+                  return InkWell(
+                    onTap: () {
+                      Navigator.pushReplacement(context,
+                          MaterialPageRoute(builder: (context) {
+                        return DetailScreen(avengers: hero);
+                      }));
+                    },
+                    child: Stack(
+                      alignment: Alignment.center,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.all(4.0),
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(10.0),
+                            child: ColorFiltered(
+                              colorFilter: ColorFilter.mode(
+                                Colors.black.withOpacity(0.5),
+                                BlendMode.darken,
+                              ),
+                              child: Image.asset(
+                                hero.imageUrl,
+                                height: 160,
+                                width: 280,
+                                fit: BoxFit.cover,
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                      Positioned(
-                        bottom: 20.0,
+                        Positioned(
+                          bottom: 20.0,
                           child: Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                        color: Colors.transparent,
-                        child: Text(
-                          hero.name,
-                          style: const TextStyle(
-                              fontFamily: 'Poppins',
-                              fontWeight: FontWeight.w600,
-                              fontSize: 16.0,
-                              color: Colors.white),
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 8.0),
+                            color: Colors.transparent,
+                            child: Text(
+                              hero.name,
+                              style: const TextStyle(
+                                fontFamily: 'Poppins',
+                                fontWeight: FontWeight.w600,
+                                fontSize: 16.0,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ),
                         ),
-                      ))
-                    ],
+                      ],
+                    ),
                   );
                 }).toList(),
               ),
