@@ -1,5 +1,4 @@
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart'; // Tambahkan import ini jika belum ada
+import 'package:flutter/material.dart';
 
 class DetailTeks extends StatelessWidget {
   final String teks;
