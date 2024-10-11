@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:marvel_app/data/content_data.dart';
-import 'package:marvel_app/my_colors.dart';
 
 class ItemAvengers extends StatelessWidget {
   final SuperheroData avengers;
@@ -57,7 +56,7 @@ class ItemAvengers extends StatelessWidget {
                     width: 8.0,
                   ),
                   Text(
-                    avengers.popularity,
+                    "${avengers.popularity}",
                     style: const TextStyle(
                         fontFamily: 'Poppins',
                         fontWeight: FontWeight.w600,
